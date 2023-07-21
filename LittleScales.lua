@@ -92,7 +92,7 @@ function LS.checkPet()
 end;
 
 function LS.repeatingTimer()
-	local cooldownThing = math.random(900/4,1800/4); -- 15-30 mins
+	local cooldownThing = math.random(300,900); -- 15-30 mins
 	C_Timer.After(cooldownThing, LS.checkPet);
 	C_Timer.After(cooldownThing, function() onCooldown = false; end)
 end;
