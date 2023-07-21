@@ -52,13 +52,17 @@ end;
 
 function LS.petSpeak(petName)
 	if petIsSummoned == true then
+		local timeStamps = date(C_CVar.GetCVar("showTimestamps"))
+		if timeStamps == "none" or nil then
+			timeStamps = ""
+		end
 		local msg = "..."
 		msg = LS.Ruszionaquotes[math.random(1, #LS.Ruszionaquotes)]
 		local sender = petName
 		local info = ChatTypeInfo["MONSTER_WHISPER"]
 		local body = CHAT_WHISPER_GET:format(sender) .. msg
 		
-		return DEFAULT_CHAT_FRAME:AddMessage(body, info.r, info.g, info.b, info.id)
+		return DEFAULT_CHAT_FRAME:AddMessage(timeStamps .. body, info.r, info.g, info.b, info.id)
 	end
 end;
 
