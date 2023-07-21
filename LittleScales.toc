@@ -1,0 +1,9 @@
+## Interface: 100105
+## Title: Little Scales
+## Notes: Adds some little flavor texts and whispers for the Little Scales Daycare whelps.
+## IconTexture: Interface\ICONS\INV_DragonWhelp3_Black
+## Author: Keyboardturner
+## Version: 0.0.1
+
+Localization.lua
+LittleScales.lua
