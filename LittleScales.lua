@@ -8,7 +8,6 @@ local Belastrasza = C_PetJournal.GetPetInfoBySpeciesID(3590);
 local Zhusadormu = C_PetJournal.GetPetInfoBySpeciesID(3598);
 local Zalethgos = C_PetJournal.GetPetInfoBySpeciesID(3599);
 local Posidriss = C_PetJournal.GetPetInfoBySpeciesID(3601);
-local onCooldown = false;
 
 LS.Ruszionaquotes = {
 
@@ -75,26 +74,22 @@ function LS.checkPet()
 		if customName ~= nil and customName ~= "" then
 			petName = customName;
 		end
-		if onCooldown == false then
-			for k, v in pairs(LS.speciesID) do
+		for k, v in pairs(LS.speciesID) do
 				if name == v then
 					LS.petSpeak(petName);
-					onCooldown = true;
 				end
 			end
-		end
 		--print(customName)
 		--print(name)
 	else
 		petIsSummoned = false;
 	end
-	LS.repeatingTimer();
 end;
 
 function LS.repeatingTimer()
-	local cooldownThing = math.random(300,900); -- 15-30 mins
+	local cooldownThing = math.random(300,900); -- 15-30 mins would probably be ideal, will see.
 	C_Timer.After(cooldownThing, LS.checkPet);
-	C_Timer.After(cooldownThing, function() onCooldown = false; end)
+	C_Timer.After(cooldownThing, LS.repeatingTimer);
 end;
 
 function LS.onSummonPet(arg1, arg2, arg3)
@@ -109,3 +104,9 @@ end;
 --LS:RegisterEvent("COMPANION_UPDATE");
 LS:RegisterEvent("PLAYER_LOGIN");
 LS:SetScript("OnEvent", LS.onSummonPet);
+
+
+SLASH_LITTLESCALES1 = "/littlescales"
+SlashCmdList["LITTLESCALES"] = function(msg)
+	LS.checkPet();
+end
